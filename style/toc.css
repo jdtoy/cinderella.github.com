@@ -18,16 +18,20 @@ ul.treelist li{
 	position:relative;
 	padding: 0 0.5em;
 	margin-left:-1em;
+	width: 0.639em;
 }
 
 .treelist-control:hover {
 	background-color:transparent;
+    text-decoration: none !important;
 }
+
 .treelist-title{
 	padding-left:16px;
 }
 .treelist-control-title {
 	cursor:pointer;
+	display: inline-block;
 }
 #nav{
 	color: #333;
