@@ -9,11 +9,22 @@
 	</script>
 	<script type="text/javascript">
 	$(function() {
-		<!-- search -->
+		
+		<!-- navigation -->
+		var path = location.pathname,
+			selectors = 'a[href="' + path + '"]';
+		if (path.match("/$")){
+			selectors += ',a[href="' + path.substring(0, path.length - 1) + '"]';
+			selectors += ',a[href="' + path + 'index.html"]';
+		}else{
+			selectors += ',a[href="' + path + '.html"]';
+		}		
+		
 		$('#nav-tree').treelist({
-			activeSelector: 'a[href="' + window.location.pathname +'"]'
+			activeSelector: selectors
 		});
-		console.log('a[href="' + window.location.pathname +'"]');
+		
+		<!-- search -->
 		$('#simple_google')
 			.submit(function() {
 				$('input[name="q"]').val("site:" + document.location.hostname + " " + $('input[name="cinderella-search"]').val());
@@ -31,13 +42,16 @@
 			})
 			.blur();
     });
+
+
+
 	</script>
 	
 	<!-- **** layout stylesheet **** -->
 	<link rel="stylesheet" type="text/css" href="{{ site.url }}/style/style.css" />
 	
 	<!-- **** toc stylesheet **** -->
-	<link rel="stylesheet" type="text/css" href="{{ site.url }}/style/toc.css" />
+	<link rel="stylesheet" type="text/css" href="{{ site.url }}/style/toc.css?1" />
 	
 	<!-- **** toc JS **** -->
 	<script type="text/javascript" src="{{ site.url }}/js/toc.js">
@@ -116,16 +130,6 @@
     </div><!--footer -->
 
 </div><!--container-->
-
-<script type="text/javascript" charset="utf-8">
-    $(document).ready(function(){
-      $('#nav').treelist({
-      	activeSelector: 'a[href="' + window.location.pathname + '.html"]'
-      });
-     });    
-  </script>
-  
-
 
 </body>
 </html>

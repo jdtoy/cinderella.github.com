@@ -5,7 +5,7 @@ $.treelist.options = {
     collapsedClass: "treelist-collapsed",
     expandedClass: "treelist-expanded",
     titleClass: "treelist-title",
-    titleClass: "treelist-control-title",
+    controltitleClass: "treelist-title",
     expandedHtml: "&#9662;",
     collapsedHtml: "&#9656;",
     titleSelector: "a, .treelist-title",
@@ -19,10 +19,11 @@ $.treelist.buildTree_ = function (ITEM, OPTIONS) {
     $(ITEM).detach();
     try {
         $("ol,ul", ITEM).prev(OPTIONS.titleSelector).each(function (ITEM, TEMP) {
-            var LINK = $("<a></a>", {
-                "class": OPTIONS.controlClass
-            }).html(OPTIONS.collapsedHtml);
+            
+            var LINK = $("<a></a>", {"class": OPTIONS.controlClass}).html(OPTIONS.collapsedHtml);
+            
             $(TEMP).addClass(OPTIONS.titleClass).before(LINK);
+            
             LINK.bind("expand", function (ITEM, TEMP) {
                 TEMP = "undefined" !== typeof TEMP ? TEMP : OPTIONS.speed;
                 $(this).html(OPTIONS.expandedHtml).removeClass(OPTIONS.collapsedClass).addClass(OPTIONS.expandedClass);
@@ -36,11 +37,12 @@ $.treelist.buildTree_ = function (ITEM, OPTIONS) {
             LINK.click(function () {
                 $(this).hasClass(OPTIONS.expandedClass) ? $(this).trigger("collapse") : $(this).trigger("expand")
             });
-            $(TEMP).is("a") || ($(TEMP).addClass(OPTIONS.controlTitleClass), $(TEMP).click(function () {
-                LINK.click()
+            $(TEMP).is("a") && !$(TEMP).is("a[href='#']") || ($(TEMP).addClass(OPTIONS.controlTitleClass), $(TEMP).click(function () {
+                LINK.click();
             }));
             var PARENT_LINK = LINK.parent(),
                 h = null;
+                
             OPTIONS.activeSelector && 0 < PARENT_LINK.find(OPTIONS.activeSelector).length ? LINK.trigger("expand", [h]) : LINK.trigger("collapse", [h])
         }), OPTIONS.activeSelector && $("ol,ul", ITEM).find(OPTIONS.activeSelector).each(function () {
             $(this).parent().addClass(OPTIONS.activeClass)

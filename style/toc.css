@@ -1,10 +1,21 @@
-ul.treelist .treelist-control,ol.treelist .treelist-control {
+#nav{
+	color: #333;
+}
+
+#nav a{
+	text-decoration:none;
+	color: #333;
+}
+
+ul.treelist .treelist-control, ol.treelist .treelist-control {
 	position:relative;
 	display:inline-block;
 	margin-left:-1.75em;
 	cursor:pointer;
 	text-decoration:none;
 }
+
+
 ul.treelist li{
 	list-style-image:none;
 	list-style-type:none;
@@ -12,9 +23,13 @@ ul.treelist li{
 	padding-top: 0.6em;
 }
 
+.treelist li.active > a {
+    color: #4289bf;
+    font-weight: 700;
+}
+
 .treelist-control {
 	cursor:pointer;
-	display:inline;
 	position:relative;
 	padding: 0 0.5em;
 	margin-left:-1em;
@@ -26,17 +41,11 @@ ul.treelist li{
     text-decoration: none !important;
 }
 
-.treelist-title{
-	padding-left:16px;
+a.treelist-title{
+	display:inline-block;
 }
+
 .treelist-control-title {
 	cursor:pointer;
 	display: inline-block;
-}
-#nav{
-	color: #333;
-}
-#nav a{
-	text-decoration:none;
-	color: #333;
 }
